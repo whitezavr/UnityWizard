@@ -115,9 +115,7 @@ void UnityWizard::accept()
 
     block += "TEST_TEAR_DOWN(" + name.toLatin1() + ")\n{\n\n}\n\n";
 
-    block += "TEST(" + name.toLatin1() + ", nameTestCase)\n{\n\n}\n\n";
-
-    block += "IGNORE_TEST(" + name.toLatin1() + ", nameTestCaseIgnore)\n{\n\n}\n";
+    block += "TEST(" + name.toLatin1() + ", )\n{\n\n}\n\n";
 
     QFile testFile(directoryOutTest);
     if (!testFile.open(QFile::WriteOnly | QFile::Text)) {
@@ -133,8 +131,9 @@ void UnityWizard::accept()
 
     block += "#include \"unity_fixture.h\"\n\n";
     block += "TEST_GROUP_RUNNER(" + name.toLatin1() + ")\n{\n";
-    block += "\tRUN_TEST_CASE(" + name.toLatin1() + ", nameTestCase);\n}\n";
-
+    for (int i = 0; i < 40; i++)
+    { block += "//\tRUN_TEST_CASE(" + name.toLatin1() + ", );\n"; }
+    block += "}\n";
 
     QFile testRunnerFile(directoryOutTestRunner);
     if (!testRunnerFile.open(QFile::WriteOnly | QFile::Text)) {
